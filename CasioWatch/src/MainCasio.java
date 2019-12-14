@@ -14,7 +14,7 @@ public class MainCasio {
 
 
     public MainCasio() throws InterruptedException, IOException, FontFormatException {
-        String filename="C:\\Users\\duyha\\IdeaProjects\\CasioWatch\\image\\CursedTimerUlil-Aznm.ttf";
+        String filename="image/CursedTimerUlil-Aznm.ttf";
 
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File(filename));
         font = font.deriveFont(Font.BOLD,36);

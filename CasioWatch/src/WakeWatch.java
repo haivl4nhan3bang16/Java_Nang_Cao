@@ -3,9 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 
 public class WakeWatch {
     String[] Hour = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"};
@@ -54,7 +52,7 @@ public class WakeWatch {
 
         btnOk.addActionListener(new ActionListener() {
             int currentHour = 0;
-            int currentMinute = 0;
+            int remainingMinute = 0;
 
 
             @Override
@@ -64,12 +62,12 @@ public class WakeWatch {
 
                 //// Em check phút
 
-                if (Integer.parseInt(cbMinute.getSelectedItem().toString()) > calendar.get(Calendar.MINUTE)) {
-                    currentMinute = Integer.parseInt(cbMinute.getSelectedItem().toString()) - calendar.get(Calendar.MINUTE);
-                } else if (Integer.parseInt(cbHour.getSelectedItem().toString()) == calendar.get(Calendar.HOUR_OF_DAY)) {
-                    currentMinute = 0;
+                int currentTimeInMinute = calendar.get(Calendar.MINUTE);
+                int selectedTimeInMinute = Integer.parseInt(cbMinute.getSelectedItem().toString());
+                if (selectedTimeInMinute >= currentTimeInMinute) {
+                    remainingMinute = selectedTimeInMinute - currentTimeInMinute;
                 } else {
-                    currentMinute = (60 - calendar.get(Calendar.MINUTE)) + Integer.parseInt(cbMinute.getSelectedItem().toString());
+                    remainingMinute = (60 - currentTimeInMinute) + selectedTimeInMinute;
                 }
 
 
@@ -83,7 +81,7 @@ public class WakeWatch {
                     currentHour = (24 - calendar.get(Calendar.HOUR_OF_DAY)) + Integer.parseInt(cbHour.getSelectedItem().toString());
                 }
 
-                JOptionPane.showMessageDialog(null, "Thời điểm chuông reo sẽ là " + currentHour + " giờ " + currentMinute + "phút sau !!!");
+                JOptionPane.showMessageDialog(null, "Thời điểm chuông reo sẽ là " + currentHour + " giờ " + remainingMinute + "phút sau !!!");
 
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -92,7 +90,7 @@ public class WakeWatch {
                                 JOptionPane.showMessageDialog(null, "Dậy đi học mày !!!!");
                             }
                         },
-                        Math.abs(((currentHour * 60) + currentMinute) * 60) * 1000
+                        Math.abs(((currentHour * 60) + remainingMinute) * 60) * 1000
                 );
             }
         });

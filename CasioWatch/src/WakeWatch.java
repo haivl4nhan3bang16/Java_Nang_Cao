@@ -66,24 +66,21 @@ public class WakeWatch {
 
                 if (Integer.parseInt(cbMinute.getSelectedItem().toString()) > calendar.get(Calendar.MINUTE)) {
                     currentMinute = Integer.parseInt(cbMinute.getSelectedItem().toString()) - calendar.get(Calendar.MINUTE);
-                } else if (Integer.parseInt(cbHour.getSelectedItem().toString()) == calendar.get(Calendar.HOUR_OF_DAY)) {
-                    currentMinute = 0;
-                } else {
+                }else {
                     currentMinute = (60 - calendar.get(Calendar.MINUTE)) + Integer.parseInt(cbMinute.getSelectedItem().toString());
                 }
 
 
                 //// Em check giờ
 
-                if (Integer.parseInt(cbHour.getSelectedItem().toString()) > calendar.get(Calendar.HOUR_OF_DAY)) {
+                if (Integer.parseInt(cbHour.getSelectedItem().toString()) >= calendar.get(Calendar.HOUR_OF_DAY)) {
                     currentHour = Integer.parseInt(cbHour.getSelectedItem().toString()) - calendar.get(Calendar.HOUR_OF_DAY);
-                } else if (Integer.parseInt(cbHour.getSelectedItem().toString()) == calendar.get(Calendar.HOUR_OF_DAY)) {
-                    currentHour = 0;
-                } else {
+                }
+                else {
                     currentHour = (24 - calendar.get(Calendar.HOUR_OF_DAY)) + Integer.parseInt(cbHour.getSelectedItem().toString());
                 }
 
-                JOptionPane.showMessageDialog(null, "Thời điểm chuông reo sẽ là " + currentHour + " giờ " + currentMinute + "phút sau !!!");
+                JOptionPane.showMessageDialog(null, "Thời điểm chuông reo sẽ là " + currentHour + " giờ " + currentMinute + " phút sau !!!");
 
                 new java.util.Timer().schedule(
                         new java.util.TimerTask() {
@@ -99,6 +96,7 @@ public class WakeWatch {
     }
 
     public JPanel getPnlAwake() {
+
         for (int i = 0; i < Hour.length; i++) {
             cbHour.addItem(Hour[i]);
         }

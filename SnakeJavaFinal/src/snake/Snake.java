@@ -20,6 +20,7 @@ import javax.swing.*;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+import view.RenderPanel;
 import view.Setting;
 
 public class Snake implements ActionListener, KeyListener {
@@ -33,6 +34,7 @@ public class Snake implements ActionListener, KeyListener {
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
     public static final int SCALE = 10;
+    public int showScore;
     public int ticks = 0;
     public int direction = 1;
     public int score;
@@ -46,14 +48,12 @@ public class Snake implements ActionListener, KeyListener {
     public boolean over = false;
     public boolean pause;
     public boolean isSetSpeed = false;
-    public Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
     public Setting view;
 
     final String filename = "D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\resources\\Infomation.txt";
     final String jsonString = FileIO.readText(filename);
-    public Score highScore = Load(jsonString);
-    public int showScore;
+    public Score highScore = Controller.Load(jsonString);
 
     public Snake() {
         this.jframe.setVisible(true);
@@ -70,14 +70,14 @@ public class Snake implements ActionListener, KeyListener {
         this.showScore = highScore.getScore();
         this.isSetSpeed = false;
         this.over = false;
-        this.pause = false;
+        this.pause = true;
         this.time = 0;
-        this.speed = 10;
+        this.speed = highScore.getSpeed();
         this.score = 0;
         this.tailLength = 1;
         this.ticks = 0;
         this.direction = 1;
-        this.head = new Point(39,25);
+        this.head = new Point(80/2,64/2);
         this.random = new Random();
         this.snakeParts.clear();
         this.food = new Point(this.random.nextInt(60), this.random.nextInt(35));
@@ -97,38 +97,34 @@ public class Snake implements ActionListener, KeyListener {
                     this.head = new Point(this.head.x, this.head.y - 1);
                 } else {
                     this.over = true;
-                    playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\deadSound.wav");
+                    Controller.soundDead();
                     setHighScore();
                 }
             }
-
-
             if (this.direction == DOWN) {
                 if (this.head.y + 1 < 67 && this.noTailAt(this.head.x, this.head.y + 1)) {
                     this.head = new Point(this.head.x, this.head.y + 1);
                 } else {
                     this.over = true;
-                    playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\deadSound.wav");
+                    Controller.soundDead();
                     setHighScore();
                 }
             }
-
             if (this.direction == LEFT) {
                 if (this.head.x - 1 >= 0 && this.noTailAt(this.head.x - 1, this.head.y)) {
                     this.head = new Point(this.head.x - 1, this.head.y);
                 } else {
                     this.over = true;
-                    playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\deadSound.wav");
+                    Controller.soundDead();
                     setHighScore();
                 }
             }
-
             if (this.direction == RIGHT) {
                 if (this.head.x + 1 < 80 && this.noTailAt(this.head.x + 1, this.head.y)) {
                     this.head = new Point(this.head.x + 1, this.head.y);
                 } else {
                     this.over = true;
-                    playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\deadSound.wav");
+                    Controller.soundDead();
                     setHighScore();
                 }
             }
@@ -141,7 +137,7 @@ public class Snake implements ActionListener, KeyListener {
                 this.score += 10;
                 ++this.tailLength;
                 this.food.setLocation(this.random.nextInt(79), this.random.nextInt(35));
-                playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\eatSound.wav");
+                Controller.playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\eatSound.wav");
             }
         }
 
@@ -202,18 +198,26 @@ public class Snake implements ActionListener, KeyListener {
                 if (options == JOptionPane.YES_OPTION) {
                     switch (view.cbSettingSpeed.getSelectedItem().toString()) {
                         case "Eazy":
+                            highScore.setSpeed(10);
+                            Controller.Save(filename, highScore);
                             this.speed = 10;
                             isSetSpeed = true;
                             break;
                         case "Normal":
+                            highScore.setSpeed(5);
+                            Controller.Save(filename, highScore);
                             this.speed = 5;
                             isSetSpeed = true;
                             break;
                         case "Hard":
+                            highScore.setSpeed(2);
+                            Controller.Save(filename, highScore);
                             this.speed = 2;
                             isSetSpeed = true;
                             break;
                         case "Extremely":
+                            highScore.setSpeed(1);
+                            Controller.Save(filename, highScore);
                             this.speed = 1;
                             isSetSpeed = true;
                             break;
@@ -244,25 +248,12 @@ public class Snake implements ActionListener, KeyListener {
     }
 
 
-    public static Score Load(String jsonString) {
-
-        Gson gson = new Gson();
-        Score score = gson.fromJson(jsonString, Score.class);
-        return score;
-    }
-
-    public static void Save(String filename, Score score) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonString = gson.toJson(score);
-        FileIO.writeText(filename, jsonString);
-    }
-
     public void setHighScore(){
         if(showScore < score){
+            Controller.playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\newScoreSound.wav");
             highScore.setScore(score);
-            Save(filename, highScore);
+            Controller.Save(filename, highScore);
             JOptionPane.showMessageDialog(null, "Bạn đã đạt " + score + " điểm, chính thức xác lập kỷ lục mới !!! WOW...Xin chúc mừng !!!");
-
         }
     }
 
@@ -281,21 +272,4 @@ public class Snake implements ActionListener, KeyListener {
         }
     }
 
-    public static void playSound(String pathname){
-        InputStream music;
-        try {
-            music = new FileInputStream(new File(pathname));
-            AudioStream audioStream = new AudioStream(music);
-            AudioPlayer.player.start(audioStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static void main(String[] args) {
-        snake = new Snake();
-    }
 }

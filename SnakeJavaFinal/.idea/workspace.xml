@@ -20,11 +20,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Intellij IDEA\IdeaProjects\SnakeJavaFinal\src\view" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Intellij IDEA\IdeaProjects\SnakeJavaFinal\lib" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Intellij IDEA\IdeaProjects\SnakeJavaFinal\src\view" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -40,8 +43,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Snake" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="snake.Snake" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="snake.Main" />
       <module name="SnakeJavaFinal" />
       <extension name="coverage">
         <pattern>
@@ -55,7 +58,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Snake" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

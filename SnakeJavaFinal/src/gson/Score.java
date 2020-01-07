@@ -6,6 +6,7 @@ import java.util.Vector;
 public class Score {
 
     private int score;
+    private int speed;
 
 
     private List<Temp> temps = new Vector<>();
@@ -30,12 +31,24 @@ public class Score {
                     '}';
         }
     }
+
+    public Score() {
+    }
+
     public int getScore() {
         return score;
     }
 
     public void setScore(int age) {
         this.score = age;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public List<Temp> getTemps() {
@@ -49,6 +62,7 @@ public class Score {
     public String toString() {
         return "Score{" +
                 ", score=" + score +
+                ", speed=" + speed +
                 ", temps=" + temps +
                 '}';
     }

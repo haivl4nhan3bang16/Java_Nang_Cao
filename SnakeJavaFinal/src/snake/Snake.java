@@ -199,10 +199,10 @@ public class Snake implements ActionListener, KeyListener {
     }
 
     public boolean noTailAt(int x, int y) {
-        Iterator var4 = snakeParts.iterator();
+        Iterator iterator = snakeParts.iterator();
 
-        while(var4.hasNext()) {
-            Point point = (Point)var4.next();
+        while(iterator.hasNext()) {
+            Point point = (Point)iterator.next();
             if (point.equals(new Point(x, y))) {
                 return false;
             }

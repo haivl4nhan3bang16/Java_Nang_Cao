@@ -23,8 +23,6 @@ public class Menu implements KeyListener {
         this.jframeMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jframeMenu.setLocationRelativeTo(null);
         this.jframeMenu.addKeyListener(this);
-
-        this.controller.playSound("D:\\Intellij IDEA\\IdeaProjects\\SnakeJavaFinal\\sound\\gameplay.wav");
     }
 
 

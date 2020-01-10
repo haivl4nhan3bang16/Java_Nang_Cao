@@ -3,21 +3,20 @@ package snake;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import gson.FileIO;
-import gson.Score;
+import gson.infomationGame;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-import javax.swing.*;
 import java.io.*;
 
 public class Controller {
-    public static Score Load(String jsonString) {
+    public static infomationGame Load(String jsonString) {
         Gson gson = new Gson();
-        Score score = gson.fromJson(jsonString, Score.class);
+        infomationGame score = gson.fromJson(jsonString, infomationGame.class);
         return score;
     }
 
-    public static void Save(String filename, Score score) {
+    public static void Save(String filename, infomationGame score) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(score);
         FileIO.writeText(filename, jsonString);

@@ -66,19 +66,14 @@ public class RenderMenu extends JPanel {
         g.setFont(new Font("Tahoma", Font.BOLD, 20));
         g.drawString(stringHowToPlay8, 410, 235);
 
-        String stringHowToPlay9 = "Lưu ý chỉ được chỉnh đúng 1 lần";
-        g.setColor(Color.black);
-        g.setFont(new Font("Tahoma", Font.BOLD, 20));
-        g.drawString(stringHowToPlay9, 410, 260);
-
         String stringHowToPlay10 = "Cố đạt điểm cao nhất có thể nhé";
         g.setColor(Color.black);
         g.setFont(new Font("Tahoma", Font.BOLD, 20));
-        g.drawString(stringHowToPlay10, 410, 285);
+        g.drawString(stringHowToPlay10, 410, 260);
 
         String stringHowToPlay11 = "CHÚC MAY MẮN !!!";
-        g.setColor(Color.black);
-        g.setFont(new Font("Tahoma", Font.BOLD, 35));
+        g.setColor(Color.green);
+        g.setFont(new Font("Tahoma", Font.BOLD, 40));
         g.drawString(stringHowToPlay11, 410, 330);
 
         Graphics2D graphics2D = (Graphics2D) g;

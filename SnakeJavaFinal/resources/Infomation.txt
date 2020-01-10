@@ -1,5 +1,5 @@
 {
-  "score": 90,
-  "speed": 1,
+  "score": 0,
+  "speed": 10,
   "temps": []
 }

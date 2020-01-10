@@ -3,7 +3,7 @@ package gson;
 import java.util.List;
 import java.util.Vector;
 
-public class Score {
+public class infomationGame {
 
     private int score;
     private int speed;
@@ -26,13 +26,13 @@ public class Score {
 
         @Override
         public String toString() {
-            return "Kid{" +
+            return "Tamp{" +
                     "name='" + name + '\'' +
                     '}';
         }
     }
 
-    public Score() {
+    public infomationGame() {
     }
 
     public int getScore() {

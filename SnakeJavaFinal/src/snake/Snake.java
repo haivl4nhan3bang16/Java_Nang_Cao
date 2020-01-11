@@ -283,7 +283,7 @@ public class Snake implements ActionListener, KeyListener {
                 startGame();
             } else {
                 pause = !pause;
-                isNewGame = false;
+                isNewGame = true;
                 showModeGame();
             }
         }
